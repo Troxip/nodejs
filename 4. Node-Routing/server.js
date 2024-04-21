@@ -7,6 +7,12 @@ const requestHandler = (req, res) => {
   if (passedUrl.pathname === "/" && req.method === "GET") {
     res.writeHead(200, { "content-type": "text/plain" });
     res.end("Welcome to the homepage");
+  } else if (passedUrl.pathname === "/about" && req.method === "GET") {
+    res.writeHead(200, { "content-type": "text/plain" });
+    res.end("Welcome to about page");
+  } else {
+    res.writeHead(200, { "content-type": "text/plain" });
+    res.end("Not Found");
   }
 };
 
