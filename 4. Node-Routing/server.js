@@ -1,11 +1,13 @@
 const http = require("http");
-// console.log(http);
+const url = require("url");
 
 const requestHandler = (req, res) => {
-  console.log(res);
-
-  res.writeHead(200, { "content-type": "text/plain" });
-  res.end("Hello world");
+  const passedUrl = url.parse(req.url, true);
+  console.log(req.method);
+  if (passedUrl.pathname === "/" && req.method === "GET") {
+    res.writeHead(200, { "content-type": "text/plain" });
+    res.end("Welcome to the homepage");
+  }
 };
 
 const server = http.createServer(requestHandler);
