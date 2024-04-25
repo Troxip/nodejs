@@ -6,7 +6,14 @@ const requestHandler = (req, res) => {
   const pathname = passedUrl.pathname;
 
   const pathComponent = pathname.split("/").filter(Boolean);
-  console.log(pathComponent);
+  if (pathComponent[0] === "products" && pathComponent[1]) {
+    const productId = pathComponent[1];
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end(`Products ID ${productId}`);
+  } else {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end(`Not Found`);
+  }
 };
 
 const server = http.createServer(requestHandler);
