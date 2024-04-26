@@ -26,6 +26,24 @@ const requestHandler = (req, res) => {
       res.writeHeader(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ message: "Employee not found" }));
     }
+  } else if (method === "POST" && url === "/employees") {
+    let body = "";
+    //Listen to the even of making post request
+    req.on("data", (chunk) => {
+      body += chunk;
+    });
+    //Sent the response
+    req.on("end", () => {
+      const newEmployee = JSON.parse(body);
+      employees.push(newEmployee);
+      res.writeHeader(200, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify({
+          newEmployee,
+          employees,
+        })
+      );
+    });
   }
 };
 
